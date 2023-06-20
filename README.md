@@ -54,7 +54,7 @@ redline-deobfuscator.exe redlineSample.exe  deobfuscatedRedLineSample.exe
      ```
 
 
-  -  After the execution of deobfuscator, the code will look like the below.
+  -  After the execution of deobfuscator, the string will look like the below.
     
      ```
        "Extension Cookies"
@@ -75,8 +75,36 @@ redline-deobfuscator.exe redlineSample.exe  deobfuscatedRedLineSample.exe
 
 
 
-  ### Deobfuscation of strings that use replace functio
-  - hello
+  ### Deobfuscation of strings using replace function
+  
+   - Another obfuscation way is to use replace function to replace parts of strings with empty one as appear below.
+    
+     ```
+     "LEnvironmentogiEnvironmentn DatEnvironmenta".Replace("Environment", string.Empty),
+     ```
+   - with the below equivalent IL code.
+  
+     ```
+    	30	004C	ldstr	"LEnvironmentogiEnvironmentn DatEnvironmenta"
+    	31	0051	ldstr	"Environment"
+    	32	0056	ldsfld	string [mscorlib]System.String::Empty
+    	33	005B	call	instance string [mscorlib]System.String::Replace(string, string)
+     ```
+  
+   - After the execution of deobfuscator, the string will look like the below.
+     
+     ```
+     "Login Data"
+     ```
+   - and the equivalent IL code will be like that
+     
+     ```
+     30	004C	nop
+     31	004D	nop
+     32	004E	nop
+     33	004F	ldstr	"Login Data"
+     ```
+     
   
 ## Dependencies
 - This deobfuscator is built by depending on [**dnlib**](https://github.com/0xd4d/dnlib) library. 
